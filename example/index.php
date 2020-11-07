@@ -16,21 +16,29 @@ session_start();
 
     <div class="container">
 
-        <div class="forms">
+    <div class="forms">
             <div class="formbox">
-                <input type="text" name="username" id="add_username">
-                <input type="password" name="password" id="add_password">
+                <label for="add_username">Username</label>
+                <input type="text" name="username" id="add_username"><br>
+                <label for="add_password">Password</label>
+                <input type="password" name="password" id="add_password"><br>
+                <label></label>
                 <button id="add">Aggiungi</button>
             </div>
 
             <div class="formbox">
-                <input type="text" name="username" id="remove_username">
+                <label for="remove_username">Username</label>
+                <input type="text" name="username" id="remove_username"><br>
+                <label></label>
                 <button id="remove">Elimina</button>
             </div>
 
             <div class="formbox">
-                <input type="text" name="username" id="login_username">
-                <input type="password" name="password" id="login_password">
+                <label for="login_username">Username</label>
+                <input type="text" name="username" id="login_username"><br>
+                <label for="login_password">Password</label>
+                <input type="password" name="password" id="login_password"><br>
+                <label></label>
                 <button id="login">Login</button>
             </div>
 

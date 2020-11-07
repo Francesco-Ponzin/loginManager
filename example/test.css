@@ -1,19 +1,31 @@
 .formbox{
-    width: 30em;
-    min-height: 5em;
+    width: 25em;
+    min-height: 3em;
     padding: 1em;
     margin: 1em;
     border: 2px antiquewhite solid;
     border-radius: 1em;
 }
 
+.formbox label{
+    display: inline-block;
+    min-width: 8em;
+}
+
 .usersTable{
     border: 1px solid antiquewhite;
     border-collapse: collapse;
+    margin: 1em;
 }
 
-.usersTable td{
+.usersTable td, .usersTable th{
     min-width: 1em;
     border: 1px solid antiquewhite;
+    padding: 0.3em 0.6em;
+}
 
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }

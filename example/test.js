@@ -83,6 +83,15 @@ function getUserList() {
             console.log(data)
             let table = document.createElement("table");
             table.classList.add("usersTable");
+            let headrow = document.createElement("tr");
+            let usernameH = document.createElement("th");
+            let userdataH = document.createElement("th");
+            usernameH.innerText = "Username";
+            userdataH.innerText = "User Data (if any)";
+            headrow.append(usernameH);
+            headrow.append(userdataH);
+            table.append(headrow);
+
             for (let user of data) {
                 let row = document.createElement("tr");
                 let username = document.createElement("td");
