@@ -1,3 +1,5 @@
+let loginManagerMainFolder = "../";
+
 document.getElementById("login").addEventListener("click", function () {
 
     let model = {
@@ -5,7 +7,7 @@ document.getElementById("login").addEventListener("click", function () {
         password: document.getElementById("login_password").value,
 
     }
-    fetch('../login.php', {
+    fetch(loginManagerMainFolder + 'login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // this line is important, if this content-type is not set it wont work
         body: 'model=' + JSON.stringify(model)
@@ -23,7 +25,7 @@ document.getElementById("add").addEventListener("click", function () {
         action: "add",
     }
 
-    fetch('../user_manager.php', {
+    fetch(loginManagerMainFolder + 'user_manager.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // this line is important, if this content-type is not set it wont work
         body: 'model=' + JSON.stringify(model)
@@ -39,7 +41,7 @@ document.getElementById("remove").addEventListener("click", function () {
         action: "remove",
     }
 
-    fetch('../user_manager.php', {
+    fetch(loginManagerMainFolder + 'user_manager.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // this line is important, if this content-type is not set it wont work
         body: 'model=' + JSON.stringify(model)
@@ -51,7 +53,7 @@ document.getElementById("remove").addEventListener("click", function () {
 document.getElementById("logout").addEventListener("click", function () {
 
 
-    fetch('../login.php', {
+    fetch(loginManagerMainFolder + 'login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // this line is important, if this content-type is not set it wont work
         body: false
@@ -70,7 +72,7 @@ function getUserList() {
         action: "loadall",
     }
 
-    fetch('../user_manager.php', {
+    fetch(loginManagerMainFolder + 'user_manager.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // this line is important, if this content-type is not set it wont work
         body: 'model=' + JSON.stringify(model)
