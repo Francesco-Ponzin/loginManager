@@ -1,4 +1,4 @@
-let loginManagerMainFolder = "../";
+let loginManagerMainFolder = "../source/";
 
 document.getElementById("login").addEventListener("click", function () {
 
