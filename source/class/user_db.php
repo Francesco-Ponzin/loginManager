@@ -45,7 +45,6 @@ class user_db{
             $user->setUserdata(json_decode($record->userdata));
             $users[] = $user;
         }
-
         return $users;
     }
 
@@ -56,6 +55,21 @@ class user_db{
         $data = [
             ':username' => $user->getUsername(),
             ':userdata' => json_encode($user->getUserdata())
+        ];
+        if (!$sth->execute($data)) {
+            throw new Exception(sprintf(
+                "Error PDO exec: %s",
+                implode(',', $db->errorInfo())
+            ));
+        }
+    }
+
+    public static function remove(User $user){
+        $db = DBconnect::db();
+        $sql = 'DELETE FROM `users` WHERE `username` = :username';
+        $sth = $db->prepare($sql);
+        $data = [
+            ':username' => $user->getUsername(),
         ];
         if (!$sth->execute($data)) {
             throw new Exception(sprintf(

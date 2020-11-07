@@ -22,4 +22,8 @@ class User{
         return $this->username;
     }
 
+    public function getAsJSON(){
+        return json_encode(["username" => $this->username, "userdata" => $this->userdata]);
+    }
+
 }
