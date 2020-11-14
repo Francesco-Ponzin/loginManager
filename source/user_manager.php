@@ -22,11 +22,12 @@ switch ($model["action"]) {
             if(!isset($model["password"])) die("missing password");
             $user = new User($model["username"]);
             if (isset($model["userdata"])) $user->setUserdata($model["userdata"]);
+            if($model["login"] ?? false) 
 
             user_db::add($user,$model["password"]);
             echo json_encode($user);    
         }else{
-            die("unauthorized");
+            die(json_encode("unauthorized"));
         }
     break;
 
@@ -40,23 +41,23 @@ switch ($model["action"]) {
             user_db::update($user);
             echo json_encode($user);    
         }else{
-            die("unauthorized");
+            die(json_encode("unauthorized"));
         }
     break;
 
     case 'remove':
-        if(isAutorized($_SESSION["username"] ?? null, "remove")){
+        if(isAutorized($_SESSION["username"] ?? null, "remove", $model)){
             if(!isset($model["username"])) die("missing username");
             $user = new User($model["username"]);
             user_db::remove($user);
             echo json_encode($user);    
         }else{
-            die("unauthorized");
+            die(json_encode("unauthorized"));
         }
     break;
     
     case 'passwordchange':
-        if(isAutorized($_SESSION["username"] ?? null, "passwordchange")){
+        if(isAutorized($_SESSION["username"] ?? null, "passwordchange", $model)){
             if(!isset($model["username"])) die("missing username");
             if(!isset($model["password"])) die("missing password");
 
@@ -64,7 +65,7 @@ switch ($model["action"]) {
 
             echo json_encode(true);    
         }else{
-            die("unauthorized");
+            die(json_encode("unauthorized"));
         }
     break;
 
@@ -82,7 +83,7 @@ switch ($model["action"]) {
 
             echo $output;    
         }else{
-            die("unauthorized");
+            die(json_encode("unauthorized"));
         }
     break;
     
@@ -92,6 +93,40 @@ switch ($model["action"]) {
 }
 
 
-function isAutorized($user, $action= null, $detail = null){
-    return true;
+function isAutorized($username, $action= null, $detail = null){
+
+    $allowed = false;
+    $forbidden = false;
+
+    $user = user_db::load($username);
+    $userData = $user ?  json_decode($user->getUserdata(), true): null;
+
+    if ( ($userData["role"] ?? "") == "admin") $allowed = true;
+
+    if ($action == "add"){
+        $allowed = true;
+    }
+    $allowed = true;
+
+    if ($action == "update"){
+
+    }
+
+    if ($action == "remove"){
+        if ($username === ($detail["username"]) ?? false) $allowed = true;
+    }
+    
+    if ($action == "passwordchange"){
+        if ($username === ($detail["username"]) ?? false) $allowed = true;
+    }
+
+    if ($action == "loadall"){
+        $allowed = true;
+    }
+    
+
+
+    if ($forbidden) return false;
+    if($allowed) return true;
+    return false;
 }

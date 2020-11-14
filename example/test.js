@@ -12,7 +12,9 @@ document.getElementById("login").addEventListener("click", function () {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // this line is important, if this content-type is not set it wont work
         body: 'model=' + JSON.stringify(model)
     }).then(
-        data => console.log(data)
+        response => response.json()
+    ).then(
+        data => document.title =  data ? "Test User " + (data) : "Test User"
     );
 })
 
@@ -30,6 +32,8 @@ document.getElementById("add").addEventListener("click", function () {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // this line is important, if this content-type is not set it wont work
         body: 'model=' + JSON.stringify(model)
     }).then(
+        response => response.json()
+    ).then(
         data => console.log(data)
     ).then(getUserList);
 })
@@ -46,6 +50,8 @@ document.getElementById("remove").addEventListener("click", function () {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // this line is important, if this content-type is not set it wont work
         body: 'model=' + JSON.stringify(model)
     }).then(
+        response => response.json()
+    ).then(
         data => console.log(data)
     ).then(getUserList);
 })
@@ -58,7 +64,7 @@ document.getElementById("logout").addEventListener("click", function () {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // this line is important, if this content-type is not set it wont work
         body: false
     }).then(
-        data => console.log(data)
+        document.title = "Test User"
     );
 })
 

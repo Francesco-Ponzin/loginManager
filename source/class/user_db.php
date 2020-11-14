@@ -20,10 +20,14 @@ class user_db{
             ));
         }
 
-        $record = $sth->fetchAll(PDO::FETCH_OBJ)[0];
-        $user = new User($record->username);
-        $user->setUserdata(json_decode($record->userdata));
-        return $user;
+
+        $record = $sth->fetchAll(PDO::FETCH_OBJ)[0] ?? null;
+        if($record !== null){
+            $user = new User($record->username);
+            $user->setUserdata(json_decode($record->userdata));
+            return $user;            
+        }
+        return false;
     }
 
     public static function loadAll(){
@@ -77,6 +81,8 @@ class user_db{
                 implode(',', $db->errorInfo())
             ));
         }
+
+        return true;
     }
 
     public static function add(User $user, string $password){

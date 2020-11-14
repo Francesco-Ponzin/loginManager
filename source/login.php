@@ -13,12 +13,12 @@ if (isset($_REQUEST["model"])) {
     $model = json_decode($_REQUEST["model"], true);
     if (loginManager::login($model["username"], $model["password"])) {
         $_SESSION["username"] = $model["username"];
-        echo true;
+        echo '"' . $_SESSION["username"] . '"';
     } else {
         session_destroy();
-        echo false;
+        echo "false";
     }
 }else{
     session_destroy();
-    echo false;
+    echo "false";
 }
