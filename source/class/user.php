@@ -1,13 +1,38 @@
 <?php
-include_once "user_db.php";
 
 class User{
 
     private $username;
-    private $userdata = "";
+    private $userdata;
 
-    public function __construct($username){
+    public function __construct($username, $role = ""){
         $this->username = $username;
+        $this->userdata = [];
+        $this->setRole($role);
+    }
+
+    public function getRole(){
+        return $this->userdata["role"] ?? $this->setRole("");
+    }
+
+    public function setRole($role){
+
+        switch ($role) {
+            case 'admin':
+                $this->userdata["role"] = "admin";
+            break;
+            case 'guest':
+                $this->userdata["role"] = "guest";
+            break;           
+            default:
+                $this->userdata["role"] = "nobody";
+            break;
+        }
+        return $this->userdata["role"];
+    }
+
+    public function getUsername(){
+        return $this->username;
     }
 
     public function getUserdata(){
@@ -15,15 +40,7 @@ class User{
     }
 
     public function setUserdata($userdata){
-        $this->userdata = $userdata;
-    }
-
-    public function getUsername(){
-        return $this->username;
-    }
-
-    public function getAsJSON(){
-        return json_encode(["username" => $this->username, "userdata" => $this->userdata]);
+        $this->userdata = is_array($userdata) ? $userdata : [];
     }
 
 }

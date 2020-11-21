@@ -25,6 +25,7 @@ document.getElementById("add").addEventListener("click", function () {
         username: document.getElementById("add_username").value,
         password: document.getElementById("add_password").value,
         action: "add",
+        role: document.getElementById("role-admin").checked ? "admin" : "guest" 
     }
 
     fetch(loginManagerMainFolder + 'user_manager.php', {
@@ -91,21 +92,21 @@ function getUserList() {
             table.classList.add("usersTable");
             let headrow = document.createElement("tr");
             let usernameH = document.createElement("th");
-            let userdataH = document.createElement("th");
+            let userRoleH = document.createElement("th");
             usernameH.innerText = "Username";
-            userdataH.innerText = "User Data (if any)";
+            userRoleH.innerText = "User role";
             headrow.append(usernameH);
-            headrow.append(userdataH);
+            headrow.append(userRoleH);
             table.append(headrow);
 
             for (let user of data) {
                 let row = document.createElement("tr");
                 let username = document.createElement("td");
                 username.innerText = user.username;
-                let userdata = document.createElement("td");
-                userdata.innerText = user.userdata;
+                let userRole = document.createElement("td");
+                userRole.innerText = user.role ? user.role: "";
                 row.append(username);
-                row.append(userdata);
+                row.append(userRole);
                 table.append(row);
             }
             document.getElementById("usersbox").append(table);

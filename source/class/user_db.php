@@ -24,7 +24,7 @@ class user_db{
         $record = $sth->fetchAll(PDO::FETCH_OBJ)[0] ?? null;
         if($record !== null){
             $user = new User($record->username);
-            $user->setUserdata(json_decode($record->userdata));
+            $user->setUserdata(json_decode($record->userdata, true));
             return $user;            
         }
         return false;
@@ -46,7 +46,7 @@ class user_db{
         $users = [];
         foreach ($records as $record) {
             $user = new User($record->username);
-            $user->setUserdata(json_decode($record->userdata));
+            $user->setUserdata(json_decode($record->userdata, true));
             $users[] = $user;
         }
         return $users;

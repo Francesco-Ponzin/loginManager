@@ -22,6 +22,10 @@ session_start();
                 <input type="text" name="username" id="add_username"><br>
                 <label for="add_password">Password</label>
                 <input type="password" name="password" id="add_password"><br>
+                <label for="role-admin" >admin</label>
+                <input type="radio" name="role" id="role-admin" ><br>
+                <label for="role-guest">guest</label>
+                <input type="radio" name="role" id="role-guest" checked><br>
                 <label></label>
                 <button id="add">Aggiungi</button>
             </div>
