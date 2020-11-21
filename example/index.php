@@ -46,6 +46,17 @@ session_start();
                 <button id="login">Login</button>
             </div>
 
+            <div class="formbox">
+                <label for="change_username">Username</label>
+                <input type="text" name="username" id="change_username"><br>
+                <label for="change_oldpassword">old Password</label>
+                <input type="password" name="oldpassword" id="change_oldpassword"><br>
+                <label for="change_password">new Password</label>
+                <input type="password" name="password" id="change_password"><br>
+                <label></label>
+                <button id="change">Change</button>
+            </div>
+
             <div class="formbox" id="logout">
                 <button id="logout">Logout</button>
             </div>

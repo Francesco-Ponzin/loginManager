@@ -114,7 +114,7 @@ function isAutorized($user, $action= null, $detail = null){
     }
     
     if ($action == "passwordchange"){
-        if ($user->getUsername === ($detail["username"]) ?? false) $allowed = true;
+        if (($user->getUsername() === ($detail["username"]) ?? false) && loginManager::login($detail["username"], $detail["oldpassword"])) $allowed = true;
     }
 
     if ($action == "loadall"){

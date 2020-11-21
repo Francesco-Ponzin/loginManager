@@ -57,6 +57,26 @@ document.getElementById("remove").addEventListener("click", function () {
     ).then(getUserList);
 })
 
+document.getElementById("change").addEventListener("click", function () {
+
+    let model = {
+        username: document.getElementById("change_username").value,
+        password: document.getElementById("change_password").value,
+        oldpassword: document.getElementById("change_oldpassword").value,
+        action: "passwordchange",
+    }
+
+    fetch(loginManagerMainFolder + 'user_manager.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // this line is important, if this content-type is not set it wont work
+        body: 'model=' + JSON.stringify(model)
+    }).then(
+        response => response.json()
+    ).then(
+        data => console.log(data)
+    ).then(getUserList);
+})
+
 document.getElementById("logout").addEventListener("click", function () {
 
 
