@@ -14,7 +14,7 @@ if (isset($_REQUEST["model"])) {
     $model = json_decode($_REQUEST["model"], true);
     if (loginManager::login($model["username"], $model["password"])) {
         $_SESSION["user"] = user_db::load($model["username"]);
-        echo '"' . $_SESSION["user"]->getUsername() . '"';
+        echo json_encode($_SESSION["user"]);
     } else {
         session_destroy();
         echo "false";

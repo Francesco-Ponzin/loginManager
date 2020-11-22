@@ -14,7 +14,7 @@ document.getElementById("login").addEventListener("click", function () {
     }).then(
         response => response.json()
     ).then(
-        data => document.title =  data ? "Test User " + (data) : "Test User"
+        data => updatePageWithUserData(data)
     );
 })
 
@@ -85,11 +85,14 @@ document.getElementById("logout").addEventListener("click", function () {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // this line is important, if this content-type is not set it wont work
         body: false
     }).then(
-        document.title = "Test User"
+        response => response.json()
+    ).then(
+        data => updatePageWithUserData(data)
     );
 })
 
 getUserList();
+updatePageWithUserData()
 
 function getUserList() {
     document.getElementById("usersbox").innerHTML = ""
@@ -132,4 +135,11 @@ function getUserList() {
             document.getElementById("usersbox").append(table);
         }
     );
+}
+
+function updatePageWithUserData(loggedUser){
+    document.title =  loggedUser ? "Test User " + (loggedUser.username) : "Test User";
+    document.getElementById("role-admin").disabled = !(loggedUser && loggedUser.role == "admin");
+    document.getElementById("role-guest").checked |= document.getElementById("role-admin").disabled;
+
 }

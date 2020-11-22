@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,7 +70,6 @@ session_start();
 
 
     </div>
-
     <script src="test.js"></script>
 </body>
 

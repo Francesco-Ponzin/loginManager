@@ -73,7 +73,7 @@ switch ($model["action"]) {
             $output = "[";
             $isFirst = true;
             foreach ($users as $user ) {
-                $output .= ($isFirst?"":",") . getUserJSON($user);
+                $output .= ($isFirst?"":",") . json_encode($user);
                 $isFirst = false;
             }
 
@@ -126,12 +126,4 @@ function isAutorized($user, $action= null, $detail = null){
     if ($forbidden) return false;
     if($allowed) return true;
     return false;
-}
-
-
-function getUserJSON(User $user){
-    $output = [];
-    $output["username"] = $user->getUsername();
-    $output["role"] = $user->getRole();
-    return json_encode($output);
 }

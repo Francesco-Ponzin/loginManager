@@ -1,6 +1,6 @@
 <?php
 
-class User{
+class User implements JsonSerializable{
 
     private $username;
     private $userdata;
@@ -41,6 +41,13 @@ class User{
 
     public function setUserdata($userdata){
         $this->userdata = is_array($userdata) ? $userdata : [];
+    }
+
+    public function jsonSerialize(){
+        $output = [];
+        $output["username"] = $this->getUsername();
+        $output["role"] = $this->getRole();
+        return $output;
     }
 
 }
