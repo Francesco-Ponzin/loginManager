@@ -15,7 +15,7 @@ session_start();
 
 if(isset($_REQUEST["model"])) $model = json_decode($_REQUEST["model"],true); else die("missing model");
 
-switch ($model["action"]) {
+switch ($model["action"] ?? "") {
     case 'add':
         if(isAutorized($_SESSION["user"] ?? null, "add", $model)){
             if(!isset($model["username"])) die("missing username");
