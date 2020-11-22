@@ -4,10 +4,12 @@ include_once "dbconnect.php";
 include_once "user.php";
 
 
-class user_db{
+class user_db
+{
 
 
-    public static function load($username){
+    public static function load($username)
+    {
 
         $db = DBconnect::db();
         $sql = 'SELECT `username`, `userdata` FROM `users` WHERE `username` = ? ';
@@ -22,15 +24,16 @@ class user_db{
 
 
         $record = $sth->fetchAll(PDO::FETCH_OBJ)[0] ?? null;
-        if($record !== null){
+        if ($record !== null) {
             $user = new User($record->username);
             $user->setUserdata(json_decode($record->userdata, true));
-            return $user;            
+            return $user;
         }
         return false;
     }
 
-    public static function loadAll(){
+    public static function loadAll()
+    {
         $db = DBconnect::db();
         $sql = 'SELECT `username`, `userdata` FROM `users`';
         $sth = $db->prepare($sql);
@@ -52,7 +55,8 @@ class user_db{
         return $users;
     }
 
-    public static function update(User $user){
+    public static function update(User $user)
+    {
         $db = DBconnect::db();
         $sql = 'UPDATE `users` SET `userdata` = :userdata WHERE `username` = :username';
         $sth = $db->prepare($sql);
@@ -68,7 +72,8 @@ class user_db{
         }
     }
 
-    public static function remove(User $user){
+    public static function remove(User $user)
+    {
         $db = DBconnect::db();
         $sql = 'DELETE FROM `users` WHERE `username` = :username';
         $sth = $db->prepare($sql);
@@ -85,7 +90,8 @@ class user_db{
         return true;
     }
 
-    public static function add(User $user, string $password){
+    public static function add(User $user, string $password)
+    {
         $db = DBconnect::db();
         $sql = 'INSERT INTO users (username, userdata, passwordhash, salt, algorithm) VALUES (:username, :userdata, :passwordhash, :salt, :algorithm)';
         $sth = $db->prepare($sql);
@@ -93,13 +99,10 @@ class user_db{
         $data = loginManager::generatePasswordDataset($password);
 
         $data += [
-                ':username' => $user->getUsername(),
-                ':userdata' => json_encode($user->getUserdata())
-            ];
+            ':username' => $user->getUsername(),
+            ':userdata' => json_encode($user->getUserdata())
+        ];
 
         return $sth->execute($data);
-
-    } 
-
-
+    }
 }

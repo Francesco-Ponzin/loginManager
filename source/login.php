@@ -10,7 +10,8 @@ include_once "class/user_db.php";
 
 session_start();
 
-if(isset($_REQUEST["model"])) $model = json_decode($_REQUEST["model"],true); else die("missing model");
+if (isset($_REQUEST["model"])) $model = json_decode($_REQUEST["model"], true);
+else die("missing model");
 
 
 switch ($model["action"] ?? "") {
@@ -22,21 +23,19 @@ switch ($model["action"] ?? "") {
         } else {
             session_destroy();
             echo "false";
-        }      
-    break;
+        }
+        break;
 
     case 'logout':
         session_destroy();
         echo "true";
-    break;
+        break;
 
     case 'load':
         echo json_encode($_SESSION["user"] ?? false);
-    break;
+        break;
 
     default:
         die("missing action");
-    break;
+        break;
 }
-
-

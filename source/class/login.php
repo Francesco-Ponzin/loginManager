@@ -2,7 +2,8 @@
 
 include_once "dbconnect.php";
 
-class loginManager{
+class loginManager
+{
 
 	public static function login($username, $password)
 	{
@@ -39,16 +40,15 @@ class loginManager{
 		}
 	}
 
-	public static function generatePasswordDataset($password, $algorithm = "sha3-256"){
+	public static function generatePasswordDataset($password, $algorithm = "sha3-256")
+	{
 		$salt = base64_encode(random_bytes("128"));
 		$passwordhash = hash($algorithm, $salt . $password);
 		$data = [
-				":passwordhash" => $passwordhash,
-				":salt" => $salt,
-				":algorithm" => $algorithm,
-			];
+			":passwordhash" => $passwordhash,
+			":salt" => $salt,
+			":algorithm" => $algorithm,
+		];
 		return $data;
 	}
-
 }
-
