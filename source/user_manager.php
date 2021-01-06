@@ -33,7 +33,6 @@ switch ($model["action"] ?? "") {
     case 'update':
         if (isAutorized($_SESSION["user"] ?? null, "update")) {
             if (!isset($model["username"])) die("missing username");
-            if (!isset($model["password"])) die("missing password");
             $user = new User($model["username"]);
             if (isset($model["role"])) $user->setRole($model["role"]);
 
